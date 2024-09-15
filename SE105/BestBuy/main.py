@@ -3,6 +3,9 @@ from store import Store
 
 
 def list_all_products(store):
+    """
+    print a list of the products available in the store
+    """
     products = store.get_all_products()
     print('------')
     index = 0
@@ -14,11 +17,17 @@ def list_all_products(store):
 
 
 def show_total_amount(store):
+    """
+    prints the total amount of products available in the store
+    """
     quantity = store.get_total_quantity()
     print(f"Total of {quantity} items in store")
 
 
 def order(store):
+    """
+    make an order to the store
+    """
     list_all_products(store)
     print("When you want to finish order, enter empty text.")
     shopping_list = []
@@ -40,6 +49,9 @@ def order(store):
 
 
 def start(store):
+    """
+    shows the menu adn asks user for input
+    """
     menu = """
     Store Menu
     ----------
@@ -71,6 +83,9 @@ def start(store):
 
 
 def main():
+    """
+    main function
+    """
     product_list = [Product("MacBook Air M2", price=1450, quantity=100),
                     Product("Bose QuietComfort Earbuds",
                             price=250, quantity=500),

@@ -1,4 +1,8 @@
 class Product:
+    """
+    a class for product
+    """
+
     def __init__(self, name, price, quantity):
         if not name:
             raise Exception("A valid name shold be given")
