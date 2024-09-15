@@ -39,7 +39,7 @@ class Store:
 
         return products
 
-    def order(self, shopping_list) -> float:
+    def order(shopping_list) -> float:
         """
         Gets a list of tuples, where each tuple has 2 items:
         Product (Product class) and quantity (int).
