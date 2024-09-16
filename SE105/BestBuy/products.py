@@ -15,8 +15,17 @@ class Product:
         if quantity <= 0:
             raise Exception("Quantity should be above zero")
         self.quantity = quantity
-
+        self._promotion = None
         self.active = True
+
+    @property
+    def promotion(self):
+        if self._promotion:
+            return self._promotion
+
+    @promotion.setter
+    def promotion(self, promotion):
+        self._promotion = promotion
 
     def get_quantity(self) -> float:
         """
@@ -56,7 +65,8 @@ class Product:
         """
         Returns a string that represents the product, for example:
         """
-        return f"{self.name}, Price: {self.price}, Quantity: {self.quantity}"
+        promotion = self._promotion.name if self._promotion else "None"
+        return f"{self.name}, Price: {self.price}, Quantity: {self.quantity}, Promotion: {promotion}"
 
     def buy(self, quantity) -> float:
         """
@@ -71,6 +81,9 @@ class Product:
         self.quantity -= quantity
         if self.quantity <= 0:
             self.active = False
+
+        if self._promotion:
+            return self._promotion.apply_promotion(self.price, quantity)
         return self.price * quantity
 
 
