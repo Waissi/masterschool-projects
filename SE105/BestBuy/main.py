@@ -1,4 +1,6 @@
 from products import Product
+from products import NonStockedProduct
+from products import LimitedProduct
 from store import Store
 
 
@@ -43,7 +45,11 @@ def order(store):
         user_product -= 1
         if user_product < len(products):
             shopping_list.append((products[user_product], user_amount))
-    total_price = store.order(shopping_list)
+    total_price = 0
+    try:
+        total_price = store.order(shopping_list)
+    except Exception:
+        print("An error occurred during order")
     if total_price > 0:
         print(f"********\nOrder made! Total payment: ${total_price}")
 
@@ -89,8 +95,13 @@ def main():
     product_list = [Product("MacBook Air M2", price=1450, quantity=100),
                     Product("Bose QuietComfort Earbuds",
                             price=250, quantity=500),
-                    Product("Google Pixel 7", price=500, quantity=250)
+                    Product("Google Pixel 7",
+                            price=500, quantity=250),
+                    NonStockedProduct("Windows License", price=125),
+                    LimitedProduct(
+                        "Shipping", price=10, quantity=250, maximum=1)
                     ]
+
     best_buy = Store(product_list)
     start(best_buy)
 

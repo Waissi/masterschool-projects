@@ -72,3 +72,58 @@ class Product:
         if self.quantity <= 0:
             self.active = False
         return self.price * quantity
+
+
+class NonStockedProduct(Product):
+
+    def __init__(self, name, price):
+        if not name:
+            raise Exception("A valid name shold be given")
+        self.name = name
+
+        if price <= 0:
+            raise Exception("Price should be above zero")
+        self.price = price
+
+        self.quantity = 0
+        self.active = True
+
+    def buy(self, quantity):
+        return self.price * quantity
+
+    def show(self):
+        return f"{self.name}, Price: {self.price}"
+
+
+class LimitedProduct(Product):
+    def __init__(self, name, price, quantity, maximum):
+        if not name:
+            raise Exception("A valid name shold be given")
+        self.name = name
+
+        if price <= 0:
+            raise Exception("Price should be above zero")
+        self.price = price
+
+        if quantity <= 0:
+            raise Exception("Quantity should be above zero")
+        self.quantity = quantity
+        self.maximum = maximum
+        self.active = True
+
+    def buy(self, quantity):
+        if quantity > self.quantity:
+            raise Exception("Remaining quantity is not enough")
+
+        if quantity > self.maximum:
+            raise Exception(
+                f"Can not order more than product maximum({self.maximum})")
+
+        self.quantity -= quantity
+        if self.quantity <= 0:
+            self.active = False
+
+        return self.price * quantity
+
+    def show(self):
+        return f"{self.name}, Price: {self.price}, Quantity: {self.quantity}, Maximum: {self.maximum}"
