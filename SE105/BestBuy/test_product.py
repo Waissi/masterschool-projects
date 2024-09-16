@@ -3,7 +3,8 @@ from products import Product
 
 def test_creating_product_works():
     product_test = Product("BOOP", 10, 10)
-    assert (product_test.show() == "BOOP, Price: 10, Quantity: 10")
+    assert (product_test.show() ==
+            "BOOP, Price: 10, Quantity: 10, Promotion: None")
 
 
 def test_raise_exception_when_creating_product_with_wrong_parameters():
