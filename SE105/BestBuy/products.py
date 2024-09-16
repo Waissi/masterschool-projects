@@ -69,4 +69,6 @@ class Product:
             raise Exception("Remaining quantity is not enough")
 
         self.quantity -= quantity
+        if self.quantity <= 0:
+            self.active = False
         return self.price * quantity
